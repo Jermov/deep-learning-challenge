@@ -1,125 +1,77 @@
-# Unit 21 Homework: Charity Funding Predictor
+# deep-learning-challenge
+# Charity Funding Predictor
+![Funny](Images/data.jpg)
+##Overview
+The goal of this project is to create an algorithm using machine learning and neural networks to predict whether applicants will be successful if funded by the fictional non-profit foundation, Alphabet Soup.
 
-## Background
 
-The nonprofit foundation Alphabet Soup wants a tool that can help it select the applicants for funding with the best chance of success in their ventures. With your knowledge of machine learning and neural networks, you’ll use the features in the provided dataset to create a binary classifier that can predict whether applicants will be successful if funded by Alphabet Soup.
+## Process
 
-From Alphabet Soup’s business team, you have received a CSV containing more than 34,000 organizations that have received funding from Alphabet Soup over the years. Within this dataset are a number of columns that capture metadata about each organization, such as:
+A csv file was provided to make this determination. This file contained 34,299 organizations that have received funding from the fictional foundation as well as some possible features to assist in finding a useable model.
 
-* **EIN** and **NAME**—Identification columns
-* **APPLICATION_TYPE**—Alphabet Soup application type
-* **AFFILIATION**—Affiliated sector of industry
-* **CLASSIFICATION**—Government organization classification
-* **USE_CASE**—Use case for funding
-* **ORGANIZATION**—Organization type
-* **STATUS**—Active status
-* **INCOME_AMT**—Income classification
-* **SPECIAL_CONSIDERATIONS**—Special consideration for application
-* **ASK_AMT**—Funding amount requested
-* **IS_SUCCESSFUL**—Was the money used effectively
+## PREPROCESSING
 
-## Instructions
+    <li> Dropped columns `EIN`, `NAME`, later determined to drop `STATUS` column as well</li>
+    <li> Found the number of data points for each unique value for each of the columns that had more than 10 unique values:
+         `APPLICATION_TYPE`, `CLASSIFICATION`, and `ASK_AMT`
+    choosing a cutoff point to bin rare categorical values together into a new value called "Other" in the case of `APPLICATION_TYPE` and `CLASSIFICATION`, and binned `ASK_AMT` into 4 ranges of ask amounts</li>
+    <li> Used pd.get_dummies() to convert categorical data to numeric </li>
+    <li> Divided the data into target array (IS_SUCCESSFUL) and features arrays </li>
+    <li> Applied the train_test_split to create a testing and a training dataset </li>
+    <li> Used StandardScaler to scale the training and testing sets </li>
 
-### Step 1: Preprocess the Data
+The data included 43 features. The target variable (y) was `IS_SUCCESSFUL`. The data was split into training and test subsets.
 
-Using your knowledge of Pandas and scikit-learn’s `StandardScaler()`, you’ll need to preprocess the dataset. This step prepares you for Step 2, where you'll compile, train, and evaluate the neural network model.
+## COMPILING, TRAINING, AND EVALUATING THE MODEL
+The model was required to achieve a target predictive accuracy higher than 75%. I made three official attempts using machine learning and neural networks. They all resulted in the same accuracy rate – right around 72%, so a little short of the required target accuracy.
 
-Using the information we have provided in the starter code, follow the instructions to complete the preprocessing steps.
+Results from each model attempt are detailed below:
 
-1. Read in the charity_data.csv to a Pandas DataFrame, and be sure to identify the following in your dataset:
-  * What variable(s) are the target(s) for your model?
-  * What variable(s) are the feature(s) for your model?
+### MODEL 1
+The first attempt [model 1](Models/AlphabetSoupCharity_model_1.h5) resulted in an accuracy score of 72.83%. At this point, I decided to drop an additional column `STATUS` to reduce feature numbers in the hopes of increasing accuracy as well as binned the `ASK_AMT` for the next model attempt.
 
-2. Drop the `EIN` and `NAME` columns.
+The hyperparameters used were:
 
-3. Determine the number of unique values for each column.
+    layers = 3
+        layer1 = 30 neurons : activation function = `relu`
+        layer2 = 10 neurons : activation function = `relu`
+        layer3 = 10 neurons : activation function = `relu`
+    epochs = 50
+![Model 1](Images/Model1_layers.PNG)</br>
+### Model 1 Accuracy Plot
+![Model 1](Images/model1_acc_loss.PNG)
 
-4. For columns that have more than 10 unique values, determine the number of data points for each unique value.
+### Model 2
+For my second attempt [model 2](Models/AlphabetSoupCharity_model_2.h5) I dropped the column `STATUS`, and binned the column `ASK_AMT` into 4 bins as well as reduced the number of layers to 1. This attempt resulted in an accuracy score of 73.02%. This means that 73.02% of the model’s predicted values align with the dataset’s true values.
 
-5. Use the number of data points for each unique value to pick a cutoff point to bin "rare" categorical variables together in a new value, `Other`, and then check if the binning was successful.
+The hyperparameters used were:
 
-6. Use `pd.get_dummies()` to encode categorical variables.
+    layers = 1
+        layer1 = 30 neurons : activation function = `tahn`
+    epochs = 50
 
-### Step 2: Compile, Train, and Evaluate the Model
+Model 2 Accuracy Plot
+![Model 2](Images/Model2_layers.PNG)</br>
+![Model 2](Images/Model2_acc_loss.PNG)</br>
 
-Using your knowledge of TensorFlow, you’ll design a neural network, or deep learning model, to create a binary classification model that can predict if an Alphabet Soup–funded organization will be successful based on the features in the dataset. You’ll need to think about how many inputs there are before determining the number of neurons and layers in your model. Once you’ve completed that step, you’ll compile, train, and evaluate your binary classification model to calculate the model’s loss and accuracy.
+### Optimization 1
+Now that I have -what I consider- a pre-processed dataframe with Model 2, I need to optimize it to see if we can reach 75% accuracy with the model.[Optimization 1](Models/AlphabetSoupCharity_Optimization1.h5) I Created a new model using preprocessing steps from Model 2, and gave `kerastuner` the option to choose the best activation type for the model (`tahn`,`relu`,`sigmoid`) with a 1 (number of hidden layers, and 10 as the number of neurons)</br>
+![Opt 1](Images/opt1_layers.PNG)</br>
 
-1. Continue using the Jupyter Notebook in which you performed the preprocessing steps from Step 1.
+The result was a 73.4% accuracy, slightly better than the original `Model 2`.
 
-2. Create a neural network model by assigning the number of input features and nodes for each layer using TensorFlow and Keras.
+### Optimization 2
+I decided for Optimization 2, to reduce the number of neurons in the model, keeping the preprocessing done in Model 2- since it gave the highest accuracy of the two pre-processing attempts.
+[Optimization 2](Models/AlphabetSoupCharity_Optimization2.h5)</br>
+![Opt 2](Images/opt2_layers.PNG)</br>
+We can see that there was a slight increase to 73.99% in accuracy.
+![Opt 2](Images/opt2_acc.PNG)</br>
 
-3. Create the first hidden layer and choose an appropriate activation function.
+### Optimization 3
+Since the increase was so slight, I increased the neurons from 10 to 40. (Images/opt3_layers.PNG)</br>
+The accuracy dropped slightly from 73.99 to 73.38. ![Opt 3](Images/opt3_acc.PNG)</br>
+[Optimization 3](Models/AlphabetSoupCharity_Optimization3.h5)</br>
 
-4. If necessary, add a second hidden layer with an appropriate activation function.
+## Summary
 
-5. Create an output layer with an appropriate activation function.
-
-6. Check the structure of the model.
-
-7. Compile and train the model.
-
-8. Create a callback that saves the model's weights every five epochs.
-
-9. Evaluate the model using the test data to determine the loss and accuracy.
-
-10. Save and export your results to an HDF5 file. Name the file `AlphabetSoupCharity.h5`.
-
-### Step 3: Optimize the Model
-
-Using your knowledge of TensorFlow, optimize your model to achieve a target predictive accuracy higher than 75%.
-
-Using any or all of the following methods to optimize your model:
-
-* Adjust the input data to ensure that no variables or outliers are causing confusion in the model, such as:
-  * Dropping more or fewer columns.
-  * Creating more bins for rare occurrences in columns.
-  * Increasing or decreasing the number of values for each bin.
-* Add more neurons to a hidden layer.
-* Add more hidden layers.
-* Use different activation functions for the hidden layers.
-* Add or reduce the number of epochs to the training regimen.
-
-**Note**: If you make at least three attempts at optimizing your model, you will not lose points if your model does not achieve target performance.
-
-1. Create a new Jupyter Notebook file and name it `AlphabetSoupCharity_Optimzation.ipynb`.
-
-2. Import your dependencies and read in the `charity_data.csv` to a Pandas DataFrame.
-
-3. Preprocess the dataset like you did in Step 1, Be sure to adjust for any modifications that came out of optimizing the model.
-
-4. Design a neural network model, and be sure to adjust for modifications that will optimize the model to achieve higher than 75% accuracy.
-
-5. Save and export your results to an HDF5 file. Name the file `AlphabetSoupCharity_Optimization.h5`.
-
-### Step 4: Write a Report on the Neural Network Model
-
-For this part of the assignment, you’ll write a report on the performance of the deep learning model you created for AlphabetSoup.
-
-The report should contain the following:
-
-1. **Overview** of the analysis: Explain the purpose of this analysis.
-
-2. **Results**: Using bulleted lists and images to support your answers, address the following questions.
-
-  * Data Preprocessing
-    * What variable(s) are the target(s) for your model?
-    * What variable(s) are the features for your model?
-    * What variable(s) should be removed from the input data because they are neither targets nor features?
-  
-* Compiling, Training, and Evaluating the Model
-    * How many neurons, layers, and activation functions did you select for your neural network model, and why?
-    * Were you able to achieve the target model performance?
-    * What steps did you take in your attempts to increase model performance?
-
-3. **Summary**: Summarize the overall results of the deep learning model. Include a recommendation for how a different model could solve this classification problem, and then explain your recommendation.
-
-- - -
-
-## Rubric
-
-[Unit 21 Homework Rubric](https://docs.google.com/document/d/1SLOROX0lqZwa1ms-iRbHMQr1QSsMT2k0boO9YpFBnHA/edit?usp=sharing)
-
-- - - 
-
-© 2022 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.	
-
+In the three attempts I made, the model was unable to achieve a target predictive accuracy higher than 73.99%. Hypertuning resulted in nearly no improvement. I would consider adding another feature to see if this increases accuracy, but the issue is more likely a dataset issue. There are only about 34,000 rows of data to work with. The small dataset would leave me less than confident to implement these models. 
