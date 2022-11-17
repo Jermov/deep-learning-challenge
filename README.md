@@ -68,7 +68,7 @@ We can see that there was a slight increase to 73.99% in accuracy.
 ![Opt 2](Images/opt2_acc.PNG)</br>
 
 ### OPTIMIZATION 3
-Since the increase was so slight, I increased the neurons from 10 to 40. (Images/opt3_layers.PNG)</br>
+Since the increase was so slight, I increased the neurons from 10 to 40. ![Opt 3](Images/opt3_layers.PNG)</br>
 The accuracy dropped slightly from 73.99 to 73.38. ![Opt 3](Images/opt3_acc.PNG)</br>
 [Optimization 3](Models/AlphabetSoupCharity_Optimization3.h5)</br>
 
