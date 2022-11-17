@@ -51,8 +51,8 @@ The hyperparameters used were:
     epochs = 50
 
 Model 2 Accuracy Plot
-![Model 2](Images/Model2_layers.PNG)</br>
-![Model 2](Images/Model2_acc_loss.PNG)</br>
+![Model 2](Images/model2_layers.PNG)</br>
+![Model 2](Images/model2_acc_loss.PNG)</br>
 
 ### OPTIMIZATION 1
 Now that I have -what I consider- a pre-processed dataframe with Model 2, I need to optimize it to see if we can reach 75% accuracy with the model.[Optimization 1](Models/AlphabetSoupCharity_Optimization1.h5) I Created a new model using preprocessing steps from Model 2, and gave `kerastuner` the option to choose the best activation type for the model (`tahn`,`relu`,`sigmoid`) with a 1 (number of hidden layers, and 10 as the number of neurons)</br>
