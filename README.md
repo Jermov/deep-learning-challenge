@@ -28,7 +28,7 @@ The model was required to achieve a target predictive accuracy higher than 75%. 
 Results from each model attempt are detailed below:
 
 ### MODEL 1
-The first attempt [model 1](Models/AlphabetSoupCharity_model_1.h5) resulted in an accuracy score of 72.83%. At this point, I decided to drop an additional column `STATUS` to reduce feature numbers in the hopes of increasing accuracy as well as binned the `ASK_AMT` for the next model attempt.
+The first attempt [model 1](Models/AlphabetSoupCharity_model_1.h5) resulted in an accuracy score of 72.83%. after this, I decided to drop an additional column `STATUS` to reduce feature numbers in the hopes of increasing accuracy as well as binned the `ASK_AMT` for the next model attempt.
 
 The hyperparameters used were:
 
