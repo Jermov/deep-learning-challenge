@@ -68,8 +68,8 @@ We can see that there was a slight increase to 73.99% in accuracy.
 ![Opt 2](Images/opt2_acc.PNG)</br>
 
 ### Optimization 3
-Since the increase was so slight, I increased the neurons from 10 to 40. Also increased the epochs from 50 to 100, but the amount of time it took to run through the epochs was insanely long- resulting in my computer falling asleep and the run failing. Several Times-reduced back to 50. </br>![Opt 3](Images/opt3_layers.PNG)</br>
-And this is after over 5 hours of running, at trial #502, still not better accuracy than 73.48%. ![Opt 3](Images/WastedTime.PNG)</br>
+Since the increase was so slight, I increased the neurons from 10 to 40. Also increased the epochs from 50 to 100, but the amount of time it took to run through the epochs was insanely long- resulting in my computer falling asleep and the run failing. After several attempts, I reduced the epochs back to 50. </br>![Opt 3](Images/opt3_layers.PNG)</br>
+This is the failed attempt at increasing epochs, after over 5 hours of running-at trial #502- the accuracy was only 73.48%, while it is the best accuracy seen, I do not think letting the model run to completion at its higher epochs would have given a 75% accuracy. ![Opt 3](Images/WastedTime.PNG)</br>
 The accuracy dropped slightly from 73.99 to 73.38. ![Opt 3](Images/opt3_acc.PNG)</br>
 [Optimization 3](Models/AlphabetSoupCharity_Optimization3.h5)</br>
 
