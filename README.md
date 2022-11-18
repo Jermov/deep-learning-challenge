@@ -9,7 +9,7 @@ The goal of this project is to create an algorithm using machine learning and ne
 
 A csv file was provided to make this determination. This file contained 34,299 organizations that have received funding from the fictional foundation as well as some possible features to assist in finding a useable model.
 
-## PREPROCESSING
+## Preprocessing
 <ul>
     <li> Dropped columns `EIN`, `NAME`, later determined to drop `STATUS` column as well</li>
     <li> Found the number of data points for each unique value for each of the columns that had more than 10 unique values:
@@ -27,7 +27,7 @@ The model was required to achieve a target predictive accuracy higher than 75%. 
 
 Results from each model attempt are detailed below:
 
-### MODEL 1
+### Model 1
 The first attempt [model 1](Models/AlphabetSoupCharity_model_1.h5) resulted in an accuracy score of 72.83%. after this, I decided to drop an additional column `STATUS` to reduce feature numbers in the hopes of increasing accuracy as well as binned the `ASK_AMT` for the next model attempt.
 
 The hyperparameters used were:
