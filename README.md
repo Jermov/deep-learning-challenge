@@ -22,7 +22,7 @@ A csv file was provided to make this determination. This file contained 34,299 o
 </ul>
 The data included 43 features. The target variable (y) was `IS_SUCCESSFUL`. The data was split into training and test subsets.
 
-## COMPILING, TRAINING, AND EVALUATING THE MODEL
+## Compiling, Training, & Evaluating the Model
 The model was required to achieve a target predictive accuracy higher than 75%. I made three official attempts using machine learning and neural networks. They all resulted in the same accuracy rate – right around 72%, so a little short of the required target accuracy.
 
 Results from each model attempt are detailed below:
