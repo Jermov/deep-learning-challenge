@@ -69,10 +69,10 @@ We can see that there was a slight increase to 73.99% in accuracy.
 
 ### Optimization 3
 Since the increase was so slight, I increased the neurons from 10 to 40. Also increased the epochs from 50 to 100, but the amount of time it took to run through the epochs was insanely long- resulting in my computer falling asleep and the run failing. After several attempts, I reduced the epochs back to 50. </br>![Opt 3](Images/opt3_layers.PNG)</br>
-This is the failed attempt at increasing epochs, after over 5 hours of running-at trial #502- the accuracy was only 73.48%, while it is the best accuracy seen, I do not think letting the model run to completion at its higher epochs would have given a 75% accuracy. ![Opt 3](Images/WastedTime.PNG)</br>
+This is the failed attempt at increasing epochs, after over 5 hours of running-at trial #502- the accuracy was only 73.48%, which was not better than the previous optimization, I do not think letting the model run to completion at its higher epochs would have given a 75% accuracy. ![Opt 3](Images/WastedTime.PNG)</br>
 The accuracy dropped slightly from 73.99 to 73.38 between Optimization 2 and Optimization 3-at the lower epoch hypertuning setting. ![Opt 3](Images/opt3_acc.PNG)</br>
 [Optimization 3](Models/AlphabetSoupCharity_Optimization3.h5)</br>
 
 ## Summary
 
-In the three attempts I made to optimize, the model was unable to achieve a target predictive accuracy higher than 73.99%. Hypertuning resulted in nearly no improvement. I would consider adding another feature to see if this increases accuracy, but the issue is more likely a dataset issue. There are only about 34,000 rows of data to work with. The small dataset would leave me less than confident to implement these models. 
+In the three attempts I made to optimize, the model was unable to achieve a target predictive accuracy higher than 73.99%- from Optimization 2. Hypertuning resulted in nearly no improvement. I would consider adding another feature to see if this increases accuracy, but the issue is more likely a size issue. There are only about 34,000 rows of data to work with. The small dataset offers less certainty with the accuracy counts. If we were to introduce next year's dataset using this model, the liklihood it would be useful would be very small given the overall size of the file to model test and training data with.
