@@ -1,11 +1,11 @@
 # deep-learning-challenge
 # Charity Funding Predictor
-![Funny](Images/data.jpg)</br>
-## OVERVIEW
+![Funny](Images/data.jpg)
+##Overview
 The goal of this project is to create an algorithm using machine learning and neural networks to predict whether applicants will be successful if funded by the fictional non-profit foundation, Alphabet Soup.
 
 
-## PROCESS
+## Process
 
 A csv file was provided to make this determination. This file contained 34,299 organizations that have received funding from the fictional foundation as well as some possible features to assist in finding a useable model.
 
@@ -41,7 +41,7 @@ The hyperparameters used were:
 ### Model 1 Accuracy Plot
 ![Model 1](Images/model1_acc_loss.PNG)
 
-### MODEL 2
+### Model 2
 For my second attempt [model 2](Models/AlphabetSoupCharity_model_2.h5) I dropped the column `STATUS`, and binned the column `ASK_AMT` into 4 bins as well as reduced the number of layers to 1. This attempt resulted in an accuracy score of 73.02%. This means that 73.02% of the model’s predicted values align with the dataset’s true values.
 
 The hyperparameters used were:
@@ -51,27 +51,28 @@ The hyperparameters used were:
     epochs = 50
 
 Model 2 Accuracy Plot
-![Model 2](Images/model2_layers.PNG)</br>
-![Model 2](Images/model2_acc_loss.PNG)</br>
+![Model 2](Images/Model2_layers.PNG)</br>
+![Model 2](Images/Model2_acc_loss.PNG)</br>
 
-### OPTIMIZATION 1
+### Optimization 1
 Now that I have -what I consider- a pre-processed dataframe with Model 2, I need to optimize it to see if we can reach 75% accuracy with the model.[Optimization 1](Models/AlphabetSoupCharity_Optimization1.h5) I Created a new model using preprocessing steps from Model 2, and gave `kerastuner` the option to choose the best activation type for the model (`tahn`,`relu`,`sigmoid`) with a 1 (number of hidden layers, and 10 as the number of neurons)</br>
 ![Opt 1](Images/opt1_layers.PNG)</br>
 
 The result was a 73.4% accuracy, slightly better than the original `Model 2`.
 
-### OPTIMIZATION 2
+### Optimization 2
 I decided for Optimization 2, to reduce the number of neurons in the model, keeping the preprocessing done in Model 2- since it gave the highest accuracy of the two pre-processing attempts.
 [Optimization 2](Models/AlphabetSoupCharity_Optimization2.h5)</br>
 ![Opt 2](Images/opt2_layers.PNG)</br>
 We can see that there was a slight increase to 73.99% in accuracy.
 ![Opt 2](Images/opt2_acc.PNG)</br>
 
-### OPTIMIZATION 3
-Since the increase was so slight, I increased the neurons from 10 to 40. ![Opt 3](Images/opt3_layers.PNG)</br>
+### Optimization 3
+Since the increase was so slight, I increased the neurons from 10 to 40. Also increased the epochs from 50 to 100, but the amount of time it took to run through the epochs was insanely long- resulting in my computer falling asleep and the run failing. Several Times-reduced back to 50. ![Opt 3](Images/opt3_layers.PNG)</br>
+And this is after over 5 hours of running, at trial #502, still not better accuracy than 73.48%. ![Opt 3](Images/WastedTime.PNG)</br>
 The accuracy dropped slightly from 73.99 to 73.38. ![Opt 3](Images/opt3_acc.PNG)</br>
 [Optimization 3](Models/AlphabetSoupCharity_Optimization3.h5)</br>
 
-## SUMMARY
+## Summary
 
-In the three attempts I made, the model was unable to achieve a target predictive accuracy higher than 73.99%. Hypertuning resulted in nearly no improvement. I would consider adding another feature to see if this increases accuracy, but the issue is more likely a dataset issue. There are only about 34,000 rows of data to work with. The small dataset would leave me less than confident to implement these models. 
+In the three attempts I made to optimize, the model was unable to achieve a target predictive accuracy higher than 73.99%. Hypertuning resulted in nearly no improvement. I would consider adding another feature to see if this increases accuracy, but the issue is more likely a dataset issue. There are only about 34,000 rows of data to work with. The small dataset would leave me less than confident to implement these models. 
