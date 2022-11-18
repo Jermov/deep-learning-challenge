@@ -10,7 +10,7 @@ The goal of this project is to create an algorithm using machine learning and ne
 A csv file was provided to make this determination. This file contained 34,299 organizations that have received funding from the fictional foundation as well as some possible features to assist in finding a useable model.
 
 ## PREPROCESSING
-
+<ul>
     <li> Dropped columns `EIN`, `NAME`, later determined to drop `STATUS` column as well</li>
     <li> Found the number of data points for each unique value for each of the columns that had more than 10 unique values:
          `APPLICATION_TYPE`, `CLASSIFICATION`, and `ASK_AMT`
@@ -19,7 +19,7 @@ A csv file was provided to make this determination. This file contained 34,299 o
     <li> Divided the data into target array (IS_SUCCESSFUL) and features arrays </li>
     <li> Applied the train_test_split to create a testing and a training dataset </li>
     <li> Used StandardScaler to scale the training and testing sets </li>
-
+</ul>
 The data included 43 features. The target variable (y) was `IS_SUCCESSFUL`. The data was split into training and test subsets.
 
 ## COMPILING, TRAINING, AND EVALUATING THE MODEL
